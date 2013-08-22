@@ -305,7 +305,8 @@ int SoftapController::setSoftap(int argc, char *argv[]) {
     }
 
     asprintf(&wbuf, "interface=%s\ndriver=" HOSTAPD_DRIVER_NAME "\nctrl_interface="
-            "/data/misc/wifi/hostapd\nssid=%s\nchannel=6\nieee80211n=1\n",
+            "/data/misc/wifi/hostapd\nssid=%s\nchannel=6\nieee80211n=1\n"
+            "hw_mode=g\n",
             iface, ssid);
 
     if (argc > 5) {
@@ -353,6 +354,7 @@ int SoftapController::setSoftap(int argc, char *argv[]) {
         return -1;
     }
 
+    close(fd);
 #else
     /* Create command line */
     i = addParam(i, "ASCII_CMD", "AP_CFG");
